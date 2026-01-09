@@ -1,0 +1,75 @@
+{
+  "id": "article-002",
+  "title": "Nginx でキャッシングを設定する",
+  "slug": "nginx-caching-guide",
+  "description": "Nginx の基本的なキャッシング設定方法と、静的サイトの配信最適化について解説します。",
+  "author": "author-001",
+  "publishedAt": "2026-01-06T10:00:00Z",
+  "updatedAt": "2026-01-06T10:00:00Z",
+  "tags": ["Nginx", "キャッシング", "パフォーマンス", "インフラ"],
+  "category": "infra",
+  "featured": true,
+  "readingTime": 10,
+  "content": [
+    {
+      "type": "heading",
+      "content": "Nginx キャッシングの基本",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "Nginx のキャッシング機能を使うことで、静的コンテンツのレスポンス速度を大幅に向上させることができます。適切なキャッシュ設定により、サーバー負荷も軽減できます。"
+    },
+    {
+      "type": "heading",
+      "content": "キャッシュゾーンの定義",
+      "level": 3
+    },
+    {
+      "type": "paragraph",
+      "content": "まず、proxy_cache_path ディレクティブでキャッシュゾーンを定義します。"
+    },
+    {
+      "type": "code",
+      "content": "proxy_cache_path /var/cache/nginx\n  levels=1:2\n  keys_zone=static_cache:10m\n  max_size=1g\n  inactive=60d;",
+      "language": "nginx"
+    },
+    {
+      "type": "heading",
+      "content": "location ブロックでの設定",
+      "level": 3
+    },
+    {
+      "type": "paragraph",
+      "content": "静的ファイルに対して、長期間のキャッシュを設定します。"
+    },
+    {
+      "type": "code",
+      "content": "location ~* \\.(js|css|png|jpg|jpeg|gif|ico|svg)$ {\n  proxy_cache static_cache;\n  proxy_cache_valid 200 365d;\n  add_header Cache-Control \"public, max-age=31536000\";\n}",
+      "language": "nginx"
+    },
+    {
+      "type": "heading",
+      "content": "gzip 圧縮の有効化",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "gzip 圧縮を有効にすることで、転送データ量を削減できます。"
+    },
+    {
+      "type": "code",
+      "content": "gzip on;\ngzip_vary on;\ngzip_proxied any;\ngzip_comp_level 6;\ngzip_types text/plain text/css text/xml text/javascript\n           application/json application/javascript application/xml+rss;",
+      "language": "nginx"
+    },
+    {
+      "type": "heading",
+      "content": "まとめ",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "Nginx のキャッシング機能を適切に設定することで、Webサイトのパフォーマンスを大幅に向上させることができます。静的サイトでは特に効果的です。"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "id": "article-001",
+  "title": "Next.js App Router で静的ブログを構築する",
+  "slug": "nextjs-app-router-static-blog",
+  "description": "Next.js 16 の App Router を使用して、完全な静的ブログサイトを構築する方法を解説します。",
+  "author": "author-001",
+  "publishedAt": "2026-01-05T09:00:00Z",
+  "updatedAt": "2026-01-08T15:30:00Z",
+  "tags": ["Next.js", "App Router", "React", "静的サイト"],
+  "category": "tech",
+  "featured": true,
+  "readingTime": 8,
+  "content": [
+    {
+      "type": "heading",
+      "content": "Next.js App Router とは",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "Next.js 13 で導入された App Router は、従来の Pages Router に代わる新しいルーティングシステムです。ファイルシステムベースのルーティングにより、直感的にファイル構造を設計できます。"
+    },
+    {
+      "type": "heading",
+      "content": "主な特徴",
+      "level": 3
+    },
+    {
+      "type": "list",
+      "content": "Server Components によるパフォーマンス向上",
+      "ordered": false
+    },
+    {
+      "type": "list",
+      "content": "ネストされたレイアウトのサポート",
+      "ordered": false
+    },
+    {
+      "type": "list",
+      "content": "段階的な静的生成 (ISR) のサポート",
+      "ordered": false
+    },
+    {
+      "type": "heading",
+      "content": "静的エクスポートの設定",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "完全な静的サイトを生成するには、next.config.ts で output を export に設定します。"
+    },
+    {
+      "type": "code",
+      "content": "const nextConfig: NextConfig = {\n  output: 'export',\n  trailingSlash: true,\n};\n\nexport default nextConfig;",
+      "language": "typescript"
+    },
+    {
+      "type": "heading",
+      "content": "まとめ",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "App Router を使用することで、モダンで高速な静的ブログサイトを簡単に構築できます。Server Components と静的生成を組み合わせることで、優れたパフォーマンスを実現できます。"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "tech",
+    "name": "技術",
+    "slug": "tech",
+    "description": "プログラミングやフレームワークに関する技術記事"
+  },
+  {
+    "id": "infra",
+    "name": "インフラ",
+    "slug": "infra",
+    "description": "サーバー、Docker、Nginx などインフラに関する記事"
+  },
+  {
+    "id": "tutorial",
+    "name": "チュートリアル",
+    "slug": "tutorial",
+    "description": "実践的なチュートリアル記事"
+  }
+]

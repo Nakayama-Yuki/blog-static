@@ -1,0 +1,50 @@
+services:
+  # 本番環境: Nginx で静的ファイルを配信
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    container_name: blog-static
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:80/",
+        ]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - blog-network
+
+  # 開発環境: Next.js dev サーバー（オプション）
+  dev:
+    image: node:24-alpine
+    container_name: blog-dev
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    ports:
+      - "3000:3000"
+    command: sh -c "corepack enable pnpm && pnpm install && pnpm dev"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - blog-network
+    profiles:
+      - dev
+
+networks:
+  blog-network:
+    driver: bridge

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "author-001",
+    "name": "田中 太郎",
+    "email": "tanaka@example.com",
+    "bio": "フロントエンド開発者。Next.js と React を得意としています。",
+    "avatar": "/images/authors/tanaka.jpg"
+  },
+  {
+    "id": "author-002",
+    "name": "佐藤 花子",
+    "email": "sato@example.com",
+    "bio": "インフラエンジニア。Docker と Kubernetes の運用経験が豊富です。",
+    "avatar": "/images/authors/sato.jpg"
+  }
+]

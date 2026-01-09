@@ -1,0 +1,63 @@
+{
+  "id": "article-003",
+  "title": "Docker マルチステージビルドでイメージを最適化",
+  "slug": "docker-multistage-build",
+  "description": "Docker のマルチステージビルドを使用して、本番用の軽量なイメージを作成する方法を解説します。",
+  "author": "author-002",
+  "publishedAt": "2026-01-07T14:00:00Z",
+  "updatedAt": "2026-01-07T14:00:00Z",
+  "tags": ["Docker", "DevOps", "最適化"],
+  "category": "infra",
+  "featured": false,
+  "readingTime": 6,
+  "content": [
+    {
+      "type": "heading",
+      "content": "マルチステージビルドとは",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "マルチステージビルドは、複数の FROM ステートメントを使用して、ビルド環境と実行環境を分離する手法です。これにより、最終的なイメージサイズを大幅に削減できます。"
+    },
+    {
+      "type": "heading",
+      "content": "基本的な構造",
+      "level": 3
+    },
+    {
+      "type": "code",
+      "content": "# ビルドステージ\nFROM node:20-alpine AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# 実行ステージ\nFROM nginx:alpine\nCOPY --from=builder /app/out /usr/share/nginx/html",
+      "language": "dockerfile"
+    },
+    {
+      "type": "heading",
+      "content": "メリット",
+      "level": 3
+    },
+    {
+      "type": "list",
+      "content": "イメージサイズの大幅な削減",
+      "ordered": false
+    },
+    {
+      "type": "list",
+      "content": "セキュリティの向上（不要なツールを含まない）",
+      "ordered": false
+    },
+    {
+      "type": "list",
+      "content": "ビルド時間の最適化",
+      "ordered": false
+    },
+    {
+      "type": "heading",
+      "content": "まとめ",
+      "level": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "マルチステージビルドを活用することで、効率的で安全な Docker イメージを作成できます。本番環境では必須のテクニックと言えるでしょう。"
+    }
+  ]
+}
