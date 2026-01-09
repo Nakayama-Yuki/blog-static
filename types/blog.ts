@@ -6,11 +6,9 @@ export interface BlogMetadata {
   title: string;
   slug: string;
   description: string;
-  author: string;
   publishedAt: string; // ISO 8601
   updatedAt: string;
   tags: string[];
-  category: string;
   featured: boolean;
   readingTime: number; // 分単位
 }
@@ -31,32 +29,4 @@ export interface BlogParagraph {
  */
 export interface BlogArticle extends BlogMetadata {
   content: BlogParagraph[];
-}
-
-/**
- * 著者情報
- */
-export interface Author {
-  id: string;
-  name: string;
-  email: string;
-  bio: string;
-  avatar?: string;
-}
-
-/**
- * カテゴリー情報
- */
-export interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-}
-
-/**
- * 著者情報付き記事
- */
-export interface BlogArticleWithAuthor extends BlogArticle {
-  authorInfo: Author | null;
 }

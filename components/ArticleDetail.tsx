@@ -1,12 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
-import { BlogArticleWithAuthor } from "@/types/blog";
+import { BlogArticle } from "@/types/blog";
 import { formatDate } from "@/lib/utils";
 import ContentRenderer from "./ContentRenderer";
 
 interface Props {
-  article: BlogArticleWithAuthor;
-  relatedArticles?: BlogArticleWithAuthor[];
+  article: BlogArticle;
+  relatedArticles?: BlogArticle[];
 }
 
 /**
@@ -16,8 +15,6 @@ export default function ArticleDetail({
   article,
   relatedArticles = [],
 }: Props) {
-  const { authorInfo } = article;
-
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       {/* ナビゲーション */}
@@ -33,26 +30,6 @@ export default function ArticleDetail({
         {/* ヘッダー */}
         <header className="mb-12">
           <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
-
-          {/* 著者情報 */}
-          {authorInfo && (
-            <div className="flex items-center gap-3 border-b pb-4 mb-6">
-              {authorInfo.avatar && (
-                <div className="relative w-12 h-12 rounded-full overflow-hidden">
-                  <Image
-                    src={authorInfo.avatar}
-                    alt={authorInfo.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              )}
-              <div>
-                <div className="font-semibold">{authorInfo.name}</div>
-                <div className="text-sm text-gray-600">{authorInfo.bio}</div>
-              </div>
-            </div>
-          )}
 
           {/* メタ情報 */}
           <div className="flex gap-6 text-sm text-gray-600 mb-4">

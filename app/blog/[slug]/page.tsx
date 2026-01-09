@@ -37,18 +37,12 @@ export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
   const blogService = getBlogService();
 
-  const article = await blogService.getArticleWithAuthor(slug);
+  const article = await blogService.getArticleBySlug(slug);
   if (!article) {
     notFound();
   }
 
-  const relatedArticlesRaw = await blogService.getRelatedArticles(slug, 3);
-  const relatedArticles = await Promise.all(
-    relatedArticlesRaw.map(async (related) => {
-      const authorInfo = await blogService.getAuthorById(related.author);
-      return { ...related, authorInfo };
-    }),
-  );
+  const relatedArticles = await blogService.getRelatedArticles(slug, 3);
 
   return <ArticleDetail article={article} relatedArticles={relatedArticles} />;
 }

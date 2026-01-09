@@ -3,11 +3,9 @@
   "title": "Nginx でキャッシングを設定する",
   "slug": "nginx-caching-guide",
   "description": "Nginx の基本的なキャッシング設定方法と、静的サイトの配信最適化について解説します。",
-  "author": "author-001",
   "publishedAt": "2026-01-06T10:00:00Z",
   "updatedAt": "2026-01-06T10:00:00Z",
   "tags": ["Nginx", "キャッシング", "パフォーマンス", "インフラ"],
-  "category": "infra",
   "featured": true,
   "readingTime": 10,
   "content": [

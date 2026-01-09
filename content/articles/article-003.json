@@ -3,11 +3,9 @@
   "title": "Docker マルチステージビルドでイメージを最適化",
   "slug": "docker-multistage-build",
   "description": "Docker のマルチステージビルドを使用して、本番用の軽量なイメージを作成する方法を解説します。",
-  "author": "author-002",
   "publishedAt": "2026-01-07T14:00:00Z",
   "updatedAt": "2026-01-07T14:00:00Z",
   "tags": ["Docker", "DevOps", "最適化"],
-  "category": "infra",
   "featured": false,
   "readingTime": 6,
   "content": [

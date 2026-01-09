@@ -1,4 +1,4 @@
-import { BlogArticle, BlogMetadata, Author, Category } from "@/types/blog";
+import { BlogArticle, BlogMetadata } from "@/types/blog";
 
 /**
  * ブログデータソースの抽象インターフェース
@@ -8,24 +8,7 @@ export interface IBlogSource {
   getArticleBySlug(slug: string): Promise<BlogArticle | null>;
   getAllArticles(): Promise<BlogArticle[]>;
   getArticlesByTag(tag: string): Promise<BlogArticle[]>;
-  getArticlesByCategory(categoryId: string): Promise<BlogArticle[]>;
   getArticlesMeta(): Promise<BlogMetadata[]>;
-}
-
-/**
- * 著者データソースのインターフェース
- */
-export interface IAuthorSource {
-  getAuthorById(id: string): Promise<Author | null>;
-  getAllAuthors(): Promise<Author[]>;
-}
-
-/**
- * カテゴリーデータソースのインターフェース
- */
-export interface ICategorySource {
-  getCategoryById(id: string): Promise<Category | null>;
-  getAllCategories(): Promise<Category[]>;
 }
 
 /**
@@ -33,11 +16,7 @@ export interface ICategorySource {
  * データソースから取得したデータを加工・集計する
  */
 export class BlogService {
-  constructor(
-    private blogSource: IBlogSource,
-    private authorSource: IAuthorSource,
-    private categorySource: ICategorySource,
-  ) {}
+  constructor(private blogSource: IBlogSource) {}
 
   // ==================== 記事操作 ====================
 
@@ -53,25 +32,8 @@ export class BlogService {
     return this.blogSource.getArticlesByTag(tag);
   }
 
-  async getArticlesByCategory(categoryId: string): Promise<BlogArticle[]> {
-    return this.blogSource.getArticlesByCategory(categoryId);
-  }
-
   async getArticlesMeta(): Promise<BlogMetadata[]> {
     return this.blogSource.getArticlesMeta();
-  }
-
-  /**
-   * 記事と著者情報を合わせて取得
-   */
-  async getArticleWithAuthor(
-    slug: string,
-  ): Promise<(BlogArticle & { authorInfo: Author | null }) | null> {
-    const article = await this.getArticleBySlug(slug);
-    if (!article) return null;
-
-    const authorInfo = await this.authorSource.getAuthorById(article.author);
-    return { ...article, authorInfo };
   }
 
   /**
@@ -88,26 +50,6 @@ export class BlogService {
   async getFeaturedArticles(limit: number = 3): Promise<BlogArticle[]> {
     const articles = await this.getAllArticles();
     return articles.filter((article) => article.featured).slice(0, limit);
-  }
-
-  // ==================== 著者操作 ====================
-
-  async getAuthorById(id: string): Promise<Author | null> {
-    return this.authorSource.getAuthorById(id);
-  }
-
-  async getAllAuthors(): Promise<Author[]> {
-    return this.authorSource.getAllAuthors();
-  }
-
-  // ==================== カテゴリー操作 ====================
-
-  async getCategoryById(id: string): Promise<Category | null> {
-    return this.categorySource.getCategoryById(id);
-  }
-
-  async getAllCategories(): Promise<Category[]> {
-    return this.categorySource.getAllCategories();
   }
 
   // ==================== 検索・集計 ====================
@@ -151,11 +93,7 @@ export class BlogService {
 
 // ==================== ファクトリー ====================
 
-import {
-  JsonBlogSource,
-  JsonAuthorSource,
-  JsonCategorySource,
-} from "./sources/json-source";
+import { JsonBlogSource } from "./sources/json-source";
 
 /**
  * BlogService のグローバルインスタンスを取得
@@ -173,8 +111,5 @@ export function getBlogService(): BlogService {
     blogSource = new JsonBlogSource();
   }
 
-  const authorSource = new JsonAuthorSource();
-  const categorySource = new JsonCategorySource();
-
-  return new BlogService(blogSource, authorSource, categorySource);
+  return new BlogService(blogSource);
 }

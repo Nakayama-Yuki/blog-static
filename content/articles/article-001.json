@@ -3,11 +3,9 @@
   "title": "Next.js App Router で静的ブログを構築する",
   "slug": "nextjs-app-router-static-blog",
   "description": "Next.js 16 の App Router を使用して、完全な静的ブログサイトを構築する方法を解説します。",
-  "author": "author-001",
   "publishedAt": "2026-01-05T09:00:00Z",
   "updatedAt": "2026-01-08T15:30:00Z",
   "tags": ["Next.js", "App Router", "React", "静的サイト"],
-  "category": "tech",
   "featured": true,
   "readingTime": 8,
   "content": [
